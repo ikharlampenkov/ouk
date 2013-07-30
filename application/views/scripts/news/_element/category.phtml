@@ -1,0 +1,19 @@
+<ul class="secand_menu">
+    <li>
+        <a href="/<?php echo $this->linkInfo->link; ?>/">КАТЕГОРИИ</a>
+        <ul>
+            <?php if ($this->categoryList !== false): ?>
+                <?php foreach ($this->categoryList as $item): ?>
+                    <li>
+                        <?php if ($this->linkInfo->parent != null): ?>
+                            <a href="<?php echo $this->url(array('controller' => 'news', 'action' => 'view', 'categoryId' => $item->id), $this->linkInfo->parent->link . '-' . $this->linkInfo->link . '-category') ?>"><?php echo $this->escape($item->title); ?></a>
+                        <?php else: ?>
+                            <a href="<?php echo $this->url(array('controller' => 'news', 'action' => 'view', 'categoryId' => $item->id), $this->linkInfo->link . '-category') ?>"><?php echo $this->escape($item->title); ?></a>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+
+    </li>
+</ul>

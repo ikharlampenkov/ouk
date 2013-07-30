@@ -1,0 +1,30 @@
+<legend>Баннеры</legend>
+
+
+<a href="<?php echo $this->url(array('controller' => 'banner', 'action' => 'add')); ?>"><i class="icon-plus"></i>добавить баннер</a> /
+<a href="<?php echo $this->url(array('controller' => 'banner', 'action' => 'viewPlace')); ?>">Площадки</a><br/><br/>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Баннер</th>
+        <th>Название</th>
+        <th>Ссылка</th>
+        <th>Действия</th>
+    </tr>
+
+    <?php if ($this->bannerList !== false): ?>
+        <?php foreach ($this->bannerList as $banner): ?>
+            <tr>
+                <td><?php if ($banner->img->getName()): ?><img src="/banners/<?php echo $banner->img->getPreview(); ?>"/><?php endif; ?></td>
+                <td><?php echo $this->escape($banner->title); ?></td>
+                <td><?php echo $this->escape($banner->link); ?></td>
+                <td class="tedit">
+                    <a href="<?php echo $this->url(array('controller' => 'banner', 'action' => 'edit', 'id' => $banner->id)); ?>"><i class="icon-pencil"></i></a>
+                    <a href="<?php echo $this->url(array('controller' => 'banner', 'action' => 'delete', 'id' => $banner->id)); ?>" onclick="return confirmDelete('<?php echo $this->escape($banner->title); ?>');"><i class="icon-remove"></i></a>
+                </td>
+
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+</table>

@@ -1,0 +1,17 @@
+.h_right p {
+	filter: glow(color=#000000,strength=2);
+	//alternativo
+	//filter: dropshadow(color=#000000,offX=1,offY=1);
+}
+
+ul.menu li:hover ul {
+	display: block;
+	position: absolute;
+	top: 23px;
+	background-color: #045d90;
+	z-index: 1000;
+}
+
+#find {
+	padding-top: 13px;
+}

@@ -1,0 +1,60 @@
+<div class="content_main">
+    <legend><?php if (is_object($this->linkInfo)): ?><?php echo $this->escape($this->linkInfo->title); ?><?php else: ?>Документы<?php endif; ?></legend>
+
+    <?php if (isset($this->exception_msg)): ?>
+        <div class="alert alert-error">
+            <h4 class="alert-heading">Ошибка!</h4>
+            <?php echo $this->escape($this->exception_msg); ?>
+        </div>
+    <?php endif; ?>
+
+
+    <?php if (isset($this->breadcrumbs)): ?>
+        <ul class="breadcrumb">
+            <li><a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'index', 'parent' => 0)); ?>">/..</a> <span class="divider">/</span></li>
+            <?php if (!empty($this->breadcrumbs)): ?>
+                <?php foreach ($this->breadcrumbs as $crumb): ?>
+                    <li><a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'index', 'parent' => $crumb->id)); ?>"><?php echo $this->escape($crumb->title); ?></a><span class="divider">/</span></li>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+        <br/><br/>
+    <?php endif; ?>
+
+    <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'addfolder', 'parent' => $this->parentId, 'link' => $this->link)); ?>"><i class="icon-plus"></i>добавить папку</a>&nbsp;&nbsp;
+    <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'add', 'parent' => $this->parentId, 'link' => $this->link)) ?>/"><i class="icon-plus"></i>добавить документ</a><br/><br/>
+
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Название</th>
+            <th>Действия</th>
+        </tr>
+
+        <?php if ($this->documentFolderList !== false): ?>
+            <?php foreach ($this->documentFolderList as $item): ?>
+                <tr>
+                    <td>
+                        <img src="/img/icon/folder.png"/>&nbsp;
+                        <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'index', 'parent' => $item->id)); ?>"><?php echo $this->escape($item->title); ?></a></td>
+                    <td class="tedit">
+                        <a href="/document/editfolder/id/<?php echo $item->id; ?>/parent/<?php echo $this->escape($this->parentId); ?>/link/<?php echo $this->escape($this->link); ?>/"><i class="icon-pencil"></a>
+                        <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'deletefolder', 'id' => $item->id)) ?>" onclick="return confirmDelete('<?php echo $this->escape($item->title); ?>');"><i class="icon-remove"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php if ($this->documentList !== false): ?>
+            <?php foreach ($this->documentList as $item): ?>
+                <tr>
+                    <td><img src="/img/icon/document.png"/>&nbsp;<?php echo $this->escape($item->title); ?></td>
+                    <td class="tedit">
+                        <a href="/document/edit/id/<?php echo $item->id; ?>/parent/<?php echo $this->escape($this->parentId); ?>/link/<?php echo $this->escape($this->link); ?>/"><i class="icon-pencil"></a>
+                        <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'delete', 'id' => $item->id)) ?>" onclick="return confirmDelete('<?php echo $this->escape($item->title); ?>');"><i class="icon-remove"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </table>
+</div>

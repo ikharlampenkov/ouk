@@ -1,0 +1,113 @@
+<div class="content">
+    <div class="news">
+        <div class="n_title">
+            <a href="#" title="Новости">Новости</a>
+        </div>
+
+        <?php if ($this->newsMainList != false): ?>
+            <?php foreach ($this->newsMainList as $item): ?>
+                <div class="one_item">
+                    <div class="item_image">
+                        <?php if ($item->file->getName()): ?>
+                            <a href="<?php if ($this->category != null): ?>
+                                         <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $item->link->getFullUrl('-') . '-viewnews-category'); ?>
+                                     <?php else: ?>
+                                         <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $item->link->getFullUrl('-') . '-viewnews'); ?>
+                                     <?php endif; ?>" title="<?php echo $this->escape($item->title); ?>">
+                                <img src="/files<?php echo $this->escape($item->file->getSubPath()); ?>/<?php echo $this->escape($item->file->getPreview()); ?>" title="<?php echo $this->escape($item->title); ?>" alt="<?php echo $this->escape($item->title); ?>"/>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="item_right">
+                        <p class="item_title"><a href="
+                                            <?php if ($this->category != null): ?>
+                                                <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $item->link->getFullUrl('-') . '-viewnews-category') ?>
+                                            <?php else: ?>
+                                                <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $item->link->getFullUrl('-') . '-viewnews') ?>
+                                            <?php endif; ?>" title=""><?php echo $this->escape(date('d.m.Y', strtotime($item->datePublic))); ?> <?php echo $this->escape($item->title); ?></a>
+                        </p>
+
+                        <p class="item_shortcontent"><?php echo $this->escape($item->shortText); ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+    </div>
+
+    <?php if ($this->newsMainMonitorList != false): ?>
+        <div class="news">
+            <div class="n_title">
+                <a href="#" title="Мониторинг СМИ">Мониторинг СМИ</a>
+            </div>
+
+            <?php foreach ($this->newsMainMonitorList as $item): ?>
+                <div class="one_item">
+                    <div class="item_image">
+                        <?php if ($item->file->getName()): ?>
+                            <a href="<?php if ($this->category != null): ?>
+                                         <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $item->link->getFullUrl('-') . '-viewnews-category'); ?>
+                                     <?php else: ?>
+                                         <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $item->link->getFullUrl('-') . '-viewnews'); ?>
+                                     <?php endif; ?>" title="<?php echo $this->escape($item->title); ?>">
+                                <img src="/files<?php echo $this->escape($item->file->getSubPath()); ?>/<?php echo $this->escape($item->file->getPreview()); ?>" title="<?php echo $this->escape($item->title); ?>" alt="<?php echo $this->escape($item->title); ?>"/>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="item_right">
+                        <p class="item_title"><a href="<?php if ($this->category != null): ?>
+                                                           <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $item->link->getFullUrl('-') . '-viewnews-category') ?>
+                                                       <?php else: ?>
+                                                            <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $item->link->getFullUrl('-') . '-viewnews') ?>
+                                                       <?php endif; ?>" title=""><?php echo $this->escape(date('d.m.Y', strtotime($item->datePublic))); ?> <?php echo $this->escape($item->title); ?></a>
+                        </p>
+
+                        <p class="item_shortcontent"><?php echo $this->escape($item->shortText); ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+<div class="sidebar">
+    <?php /*
+        <div class="s_one">
+            <div class="s_title">Главное</div>
+            <div class="s_content">
+                <div class="banner"><a href="#" title=""><img src="/img/banner1.jpg" title="" alt=""/></a></div>
+                <p><a href="#" title="Приказ Минрегиона об определении новой точки раскрытия информации - миф или реальность?">Приказ Минрегиона об определении новой точки раскрытия информации - миф или реальность?</a></p>
+            </div>
+        </div>
+        <div class="s_one">
+            <div class="s_title">Мероприятия</div>
+            <div class="s_content">
+                <div class="banner"><a href="#" title=""><img src="/img/banner2.jpg" title="" alt=""/></a></div>
+                <p><a href="#" title="">III ВСЕРОССИЙСКИЙ ФОРУМ САМОРЕГУЛИРУЕМЫХ ОРГАНИЗАЦИЙ</a></p>
+            </div>
+        </div>
+     */
+    ?>
+    <div class="s_one">
+        <div class="s_title">Партнеры</div>
+        <div class="s_content">
+            <?php if ($this->partnersList !== false): ?>
+                <?php foreach ($this->partnersList as $partner): ?>
+                    <?php if ($partner->file->getName()): ?>
+                        <div class="banner"><a href="http://<?php echo $this->escape($partner->url); ?>" target="_blank"><img src="/files<?php echo $this->escape($partner->file->getSubPath()); ?>/<?php echo $this->escape($partner->file->getName()); ?>" border="0"></a></div>
+                        <?php $i++; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php /*
+                <div class="banner"><a href="#" title=""><img src="/img/banner3.jpg" title="" alt=""/></a></div>
+                <div class="banner"><a href="#" title=""><img src="/img/banner4.jpg" title="" alt=""/></a></div>
+                <div class="banner"><a href="#" title=""><img src="/img/banner5.jpg" title="" alt=""/></a></div>
+                <div class="banner"><a href="#" title=""><img src="/img/banner6.jpg" title="" alt=""/></a></div>
+     */
+            ?>
+        </div>
+    </div>
+</div>

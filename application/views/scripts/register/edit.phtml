@@ -1,0 +1,87 @@
+<legend>Редактировать УК</legend>
+
+<?php if (isset($this->exception_msg)): ?>
+    <div class="alert alert-error">
+        <h4 class="alert-heading">Ошибка!</h4>
+        <?php echo $this->escape($this->exception_msg); ?>
+    </div>
+<?php endif; ?>
+
+<form class="form-horizontal" action="<?php echo $this->url(array('controller' => 'register', 'action' => 'edit', 'id' => $this->register->id, 'link' => $this->escape($this->link))) ?>" method="post" enctype="multipart/form-data">
+    <div class="control-group">
+        <label class="control-label">Название</label>
+
+        <div class="controls">
+            <input type="text" name="data[title]" value="<?php echo $this->escape($this->register->title); ?>"/>
+            <span class="help-inline hide">Заполните поле</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Город</label>
+
+        <div class="controls">
+            <select name="data[city]">
+                <?php if ($this->cityList != false): ?>
+                    <?php foreach ($this->cityList as $city): ?>
+                        <option value="<?php echo $this->escape($city->id); ?>" <?php if ($this->register->city != null && $this->register->city->id == $city->id): ?>selected="selected"<?php endif; ?>><?php echo $this->escape($city->title); ?></option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+            <span class="help-inline hide">Заполните поле</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">ОГРН</label>
+
+        <div class="controls">
+            <input type="text" name="data[ogrn]" value="<?php echo $this->escape($this->register->ogrn); ?>"/>
+            <span class="help-inline hide">Заполните поле</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Юридический адрес</label>
+
+        <div class="controls">
+            <input type="text" name="data[registeredAddress]" value="<?php echo $this->escape($this->register->registeredAddress); ?>"/>
+            <span class="help-inline hide">Заполните поле</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Почтовый адрес</label>
+
+        <div class="controls">
+            <input type="text" name="data[postalAddress]" value="<?php echo $this->escape($this->register->postalAddress); ?>"/>
+            <span class="help-inline hide">Заполните поле</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Тел./факс</label>
+
+        <div class="controls">
+            <input type="text" name="data[phone]" value="<?php echo $this->escape($this->register->phone); ?>"/>
+            <span class="help-inline hide">Заполните поле</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Сайт</label>
+
+        <div class="controls">
+            <input type="text" name="data[site]" value="<?php echo $this->escape($this->register->site); ?>"/>
+            <span class="help-inline hide">Заполните поле</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Директор</label>
+
+        <div class="controls">
+            <input type="text" name="data[director]" value="<?php echo $this->escape($this->register->director); ?>"/>
+            <span class="help-inline hide">Заполните поле</span>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <input type="submit" class="btn btn-success" value="Сохранить"/>
+        <a href="<?php echo $this->url(array('controller' => 'register', 'action' => 'index', 'link' => $this->escape($this->link))) ?>" class="btn btn-danger">Отмена</a>
+    </div>
+</form>

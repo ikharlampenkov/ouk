@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html id="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html id="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html id="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html id="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Объединение управляющих компаний Кемеровской области</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <?php if ($this->authUserRole !== 'guest'): ?>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+    <?php endif; ?>
+    <link title="Screen" rel="stylesheet" type="text/css" href="/js/jqueryui/css/smoothness/jquery-ui.min.css"/>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script type="text/javascript" src="/js/vendor/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/i18n/jquery.ui.datepicker-ru.js"></script>
+    <script type="text/javascript" src="/js/rhinoslider.js"></script>
+    <script type="text/javascript" src="/js/plugins.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="/css/rhinoslider.css">
+    <!--[if IE]>
+    <link rel="stylesheet" href="/css/ie.css">
+    <![endif]-->
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="h_images">
+        <ul class="slideshow" id="slideshow">
+            <li><img src="/img/slide1.jpg" title="" alt=""/></li>
+            <li><img src="/img/slide2.jpg" title="" alt=""/></li>
+            <li><img src="/img/slide3.jpg" title="" alt=""/></li>
+            <li><img src="/img/slide4.jpg" title="" alt=""/></li>
+        </ul>
+    </div>
+    <div class="h_bg_left"></div>
+    <div class="h_bg_right"></div>
+    <div class="header">
+        <div class="logo">
+            <a href="/" title="Главная страница"><img src="/img/logo.png" title="Главная страница" alt="Объединение управляющих компаний Кемеровской области"/></a>
+        </div>
+        <div class="h_right">
+            <div class="title_text"></div>
+        </div>
+        <div class="main_menu">
+            <ul class="menu">
+                <li><a href="/" title="Главная">Главная</a></li>
+                <?php $firstItem = true; ?>
+                <?php foreach ($this->topMenuList as $item): ?>
+                    <?php if ($item->isVisible): ?>
+                        <li <?php if ($firstItem):
+                            $firstItem = false; ?>class="first"<?php endif; ?> >
+                        <a href="<?php if ($item->hasChild()): ?>#<?php else: ?> <?php echo $this->escape($item->getUrl($this->authUserRole)); ?><?php endif; ?>"><?php echo $this->escape($item->title) ?></a>
+                            <?php if ($item->hasChild()): ?>
+                                <?php echo $this->partial('_submenu.phtml', array('itemList' => $item->getChild(), 'authUserRole' => $this->authUserRole)); ?>
+                            <?php endif; ?>
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+                <?php if ($this->authUserRole !== 'guest'): ?>
+                    <li>
+                        <a href="#" title="Управление">Управление</a>
+                        <ul>
+                            <li><a href="/menu/">Меню</a></li>
+                            <li><a href="/contentpage/">Контентные страницы</a></li>
+                            <li><a href="/partners/index/link/pane/">Партнеры</a></li>
+                            <li><a href="/register/">Реестр УК</a></li>
+                            <li><a href="/banner/">Баннеры</a></li>
+                            <li><a href="/phone/">Телефоны</a></li>
+                            <li><a href="/user/">Пользователи</a></li>
+                            <li><a href="/login/logout/"><?php echo $this->authUser; ?> (выход)</a></li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php /*
+            <li><a href="/" title="Главная">Главная</a></li>
+            <li><a href="#" title="О СРО">О СРО</a></li>
+            <li>
+                <a href="#" title="Пресс-центр">Пресс-центр</a>
+                <ul>
+                    <li><a href="#" title="Новости">Новости</a></li>
+                    <li><a href="#" title="Новости регионов">Новости регионов</a></li>
+                    <li><a href="#" title="Статьи и комментарии">Статьи и комментарии</a></li>
+                    <li><a href="#" title="Фото- и видеоматериалы">Фото- и видеоматериалы</a></li>
+                    <li><a href="#" title="События и мероприятия">События и мероприятия</a></li>
+                </ul>
+            </li>
+            <li><a href="#" title="Реестр УК">Реестр УК</a></li>
+            <li><a href="#" title="Справочные материалы">Справочные материалы</a></li>
+            <li><a href="#" title="Раскрытие информации">Раскрытие информации</a></li>
+ */
+                ?>
+            </ul>
+        </div>
+    </div>
+
+
+    <?php echo $this->layout()->content; ?>
+
+
+    <div class="aside">
+        <div class="weare">
+            <p>Члены Некоммерческого партнерства «Объединение управляющих компаний Кемеровской области»</p>
+        </div>
+        <div class="search">
+            <input type="text" name="testfind" id="find" value="Найти на сайте..." onfocus="if (this.value=='Найти на сайте...') this.value='' " onblur="if (this.value==''){this.value='Найти на сайте...'}"/>
+        </div>
+        <div class="allmap">
+            <div class="m_image"></div>
+            <div class="map">
+                <?php if ($this->cityMapList != false): ?>
+                    <?php foreach ($this->cityMapList as $city): ?>
+                        <div class="<?php echo $this->escape($city->code); ?>"><a href="javascript:;" title="<?php echo $this->escape($city->title); ?>" id="<?php echo $this->escape($city->code); ?>" class="tabs <?php if ($city->title == 'Кемерово'): ?>active<?php endif; ?>"><?php echo $this->escape($city->title); ?></a></div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+            <div class="m1_content">
+                <?php if ($this->cityMapList != false): ?>
+                    <?php foreach ($this->cityMapList as $city): ?>
+                        <div id="con_<?php echo $this->escape($city->code); ?>" class="tabs <?php if ($city->title == 'Кемерово'): ?>active<?php endif; ?>">
+                            <p class="m_title"><?php echo $this->escape($city->title); ?></p>
+
+                            <div class="m_content">
+                                <?php //print_r($this->mcMapList[$city->code]); ?>
+                                <?php if (isset($this->mcMapList[$city->code]) && !empty($this->mcMapList[$city->code])): ?>
+                                    <?php foreach ($this->mcMapList[$city->code] as $mc): ?>
+                                        <div class="one_adr">
+                                            <p><b><?php echo $this->escape($mc->title); ?></b></p>
+
+                                            <p>ОГРН: <?php echo $this->escape($mc->ogrn); ?></p>
+
+                                            <p>Юридический адрес: <?php echo $this->escape($mc->registeredAddress); ?></p>
+
+                                            <?php if ($mc->postalAddress != ''): ?><p>Почтовый адрес: <?php echo $this->escape($mc->postalAddress); ?></p><?php endif; ?>
+                                            <?php if ($mc->phone != ''): ?><p>Тел./факс: <?php echo $this->escape($mc->phone); ?>  </p><?php endif; ?>
+                                            <?php if ($mc->site != ''): ?><p>Сайт: <?php echo $this->escape($mc->site); ?>  </p><?php endif; ?>
+
+                                            <p>Директор: <?php echo $this->escape($mc->director); ?> </p>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>СРО НП «Объединение управляющих компаний Кемеровской области»,</p>
+
+        <p>г. Кемерово, ул. Заузелкова, д. 2, тел.: +7 (3842) 56-71-16</p>
+
+        <p>e-mail: <a href="mailto:ouk-ko@mail.ru" title="Отправить письмо по электронной почте">ouk-ko@mail.ru</a></p>
+
+        <p>Представительство г. Новокузнецк, ул. Новоселов, 38, тел.: +7 (3843) 63-13-13</p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<div class="content_main">
+    <div class="n_title">
+        <a href="#" title="<?php if (is_object($this->linkInfo)): ?><?php echo $this->escape($this->linkInfo->title); ?><?php else: ?>Документы<?php endif; ?>"><?php if (is_object($this->linkInfo)): ?><?php echo $this->escape($this->linkInfo->title); ?><?php else: ?>Документы<?php endif; ?></a>
+    </div>
+
+    <?php if (isset($this->breadcrumbs)): ?>
+        <ul class="breadcrumb">
+            <li><a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'index', 'parent' => 0)); ?>">/..</a> <span class="divider">/</span></li>
+            <?php if (!empty($this->breadcrumbs)): ?>
+                <?php foreach ($this->breadcrumbs as $crumb): ?>
+                    <li><a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'index', 'parent' => $crumb->id)); ?>"><?php echo $this->escape($crumb->title); ?></a> <span class="divider">/</span></li>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+        <br/><br/>
+    <?php endif; ?>
+
+    <ul class="document">
+        <?php if ($this->documentFolderList !== false): ?>
+            <?php foreach ($this->documentFolderList as $item): ?>
+                <li>
+                    <img src="/img/icon/folder.png"/>&nbsp;
+                    <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'view', 'parent' => $item->id), $this->linkInfo->getFullUrl('-') . '-parent'); ?>"><?php echo $this->escape($item->title); ?></a>
+                </li>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php if ($this->documentList !== false): ?>
+            <?php foreach ($this->documentList as $item): ?>
+                <li><img src="/img/icon/document.png"/>&nbsp;
+                    <?php if (is_object($item->parent)): ?>
+                        <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'viewdoc', 'id' => $item->id, 'parent' => $item->parent->id), $this->linkInfo->getFullUrl('-') . '-viewdoc') ?>"><?php echo $this->escape($item->title); ?></a>
+                    <?php else: ?>
+                        <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'viewdoc', 'id' => $item->id, 'parent' => '0'), $this->linkInfo->getFullUrl('-') . '-viewdoc') ?>"><?php echo $this->escape($item->title); ?></a>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+    </ul>
+
+</div>

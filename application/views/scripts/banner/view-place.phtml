@@ -1,0 +1,32 @@
+<legend>Площадки</legend>
+
+<a href="<?php echo $this->url(array('controller' => 'banner', 'action' => 'addPlace')); ?>"><i class="icon-plus"></i>добавить площадку</a><br/><br/>
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>Название</th>
+        <th>Ширина</th>
+        <th>Высота</th>
+        <th>Время смены</th>
+        <th>Действия</th>
+    </tr>
+
+    <?php if ($this->placeList !== false): ?>
+        <?php foreach ($this->placeList as $place): ?>
+            <tr>
+                <td><?php echo $this->escape($place->title); ?></td>
+                <td><?php echo $this->escape($place->width); ?></td>
+                <td><?php echo $this->escape($place->height); ?></td>
+                <td><?php echo $this->escape($place->changeTime); ?></td>
+                <td class="tedit">
+                    <a href="<?php echo $this->url(array('controller' => 'banner', 'action' => 'placemark', 'id' => $place->id)); ?>">размещение</a><br/>
+                    <a href="<?php echo $this->url(array('controller' => 'banner', 'action' => 'editPlace', 'id' => $place->id)); ?>"><i class="icon-pencil"></i></a>
+                    <a href="<?php echo $this->url(array('controller' => 'banner', 'action' => 'deletePlace', 'id' => $place->id)); ?>" onclick="return confirmDelete('<?php echo $this->escape($place->title); ?>');"><i class="icon-remove"></i></a>
+                </td>
+
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+</table>

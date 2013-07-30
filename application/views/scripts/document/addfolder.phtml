@@ -1,0 +1,46 @@
+<div class="content_main">
+
+    <legend>Добавить документ</legend>
+
+
+    <?php if (isset($this->exception_msg)): ?>
+        <div class="alert alert-error">
+            <h4 class="alert-heading">Ошибка!</h4>
+            <?php echo $this->escape($this->exception_msg); ?>
+        </div>
+    <?php endif; ?>
+
+    <form class="form-horizontal" action="<?php echo $this->url(array('controller' => 'document', 'action' => 'addfolder')); ?>" method="post" enctype="multipart/form-data">
+
+        <div class="control-group">
+            <label class="control-label">Название</label>
+
+            <div class="controls">
+                <input type="text" name="data[title]" value="<?php echo $this->escape($this->document->title); ?>"/>
+                <span class="help-inline hide">Заполните поле</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Папка</label>
+
+            <div class="controls">
+                <select name="data[parent]">
+                    <option value="">корень</option>
+                    <?php if ($this->documentFolderList != false): ?>
+                        <?php foreach ($this->documentFolderList as $item): ?>
+                            <option value="<?php echo $this->escape($item->id); ?>" <?php if (is_object($this->document->parent) && $this->document->parent->id == $item->id): ?>selected="selected"<?php endif; ?> ><?php echo $this->escape($item->title); ?></option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+                <span class="help-inline hide">Заполните поле</span>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input type="submit" class="btn btn-success" value="Сохранить"/>
+            <a href="<?php echo $this->url(array('controller' => 'document', 'action' => 'index')) ?>" class="btn btn-danger">Отмена</a>
+        </div>
+    </form>
+
+</div>
