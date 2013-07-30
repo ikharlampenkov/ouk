@@ -198,7 +198,7 @@ class SM_Module_News
      */
     public function getShortText()
     {
-        return $this->_shortText;
+        return stripslashes($this->_shortText);
     }
 
     /**
