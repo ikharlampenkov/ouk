@@ -29,6 +29,13 @@ function showContentPage(object, item) {
     }
 }
 
+function showQuestionForm() {
+    if ($('#questionForm').css("display") == "none") {
+        $('#questionForm').slideDown();
+    } else {
+        $('#questionForm').css("display", "none");
+    }
+}
 
 $(document).ready(function () {
     $(".datepicker").datepicker();
