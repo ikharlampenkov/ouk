@@ -585,7 +585,7 @@ class SM_Module_GuestBook
 
     public function getChild()
     {
-        return $this::getFolderList($this->_link, $this);
+        return SM_Module_GuestBook::getFolderList($this->_link, $this);
     }
 
     /**
