@@ -146,7 +146,7 @@ class SM_Module_News
      */
     public function getTitle()
     {
-        return $this->_title;
+        return stripslashes($this->_title);
     }
 
     /**
