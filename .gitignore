@@ -2,3 +2,5 @@
 public/ckeditor
 public/ckfinder
 library/Zend
+public/files/*.jpg
+public/files/*.gif
