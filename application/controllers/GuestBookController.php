@@ -60,6 +60,8 @@ class GuestBookController extends Zend_Controller_Action
         $form->removeElement('moderate');
         $form->removeElement('answer');
         $form->submit->setLabel('Отправить вопрос');
+        $form->email->setRequired(true);
+        $form->name->setRequired(true);
         $form->setParentList(SM_Module_GuestBook::getFolderList($this->_link, SM_Module_GuestBook::IS_ROOT));
         if ($this->_parent != null) {
             $form->setDefault('parent', $oQuestion->getParent()->getId());
@@ -69,6 +71,7 @@ class GuestBookController extends Zend_Controller_Action
         if (!isset($mainSession->isComplite)) {
             $mainSession->isComplite = false;
         }
+        $this->view->assign('openForm', false);
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
@@ -88,6 +91,8 @@ class GuestBookController extends Zend_Controller_Action
                 } catch (Exception $e) {
                     $this->view->assign('exception_msg', $e->getMessage());
                 }
+            } else {
+                $this->view->assign('openForm', true);
             }
         }
 

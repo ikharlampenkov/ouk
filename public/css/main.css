@@ -833,3 +833,50 @@ a.ttovar {
 .doc_text {
     text-align: justify;
 }
+
+/*************** guest book ******************/
+.page_guestbook {
+    width: 1000px;
+    min-height: 500px;
+    float: left;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.page_guestbook_inner {
+    width: 836px;
+    margin: 53px auto 0 auto;
+    position: relative;
+    padding: 0 0 30px 0;
+}
+
+.page_guestbook .page_guestbook_inner h1 {
+    color: #4e90cd;
+    font-family: Tahoma, sans-serif;
+    font-size: 31px;
+    font-weight: 100;
+    padding: 0;
+    margin: 0 0 35px 0;
+}
+
+.page_guestbook .page_guestbook_inner p {
+    text-align: justify;
+}
+
+.answer_question {
+    color: #4e90cd;
+    font-family: Tahoma, sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    padding: 0;
+    margin: 0;
+}
+
+.question_title {
+    color: #4e90cd;
+    font-family: Tahoma, sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    padding: 0;
+    margin: 0;
+}

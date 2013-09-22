@@ -97,6 +97,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $auto->registerNamespace('TM');
         $auto->registerNamespace('SM');
         $auto->registerNamespace('StdLib');
+        $auto->registerNamespace('Twitter');
     }
 
     protected function _initConfig()
