@@ -21,9 +21,9 @@
                     <div class="descript">
                         <p class="title">
                             <?php if ($this->category != null): ?>
-                                <a href="<?php echo $this->url(array('controller' => 'calendar', 'action' => 'viewcalendar', 'id' => $item->id, 'categoryId' => $this->category->id), $this->linkInfo->link . '-viewcalendar-category') ?>"><?php echo $this->escape($item->title); ?></a>
+                                <a href="<?php echo $this->url(array('controller' => 'calendar', 'action' => 'viewcalendar', 'id' => $item->id, 'categoryId' => $this->category->id), $this->linkInfo->getFullUrl('-') . '-viewcalendar-category') ?>"><?php echo $this->escape($item->title); ?></a>
                             <?php else: ?>
-                                <a href="<?php echo $this->url(array('controller' => 'calendar', 'action' => 'viewcalendar', 'id' => $item->id), $this->linkInfo->link . '-viewcalendar') ?>"><?php echo $this->escape($item->title); ?></a>
+                                <a href="<?php echo $this->url(array('controller' => 'calendar', 'action' => 'viewcalendar', 'id' => $item->id), $this->linkInfo->getFullUrl('-') . '-viewcalendar') ?>"><?php echo $this->escape($item->title); ?></a>
                             <?php endif; ?>
                         </p>
 
