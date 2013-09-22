@@ -97,7 +97,6 @@
                 <?php foreach ($this->partnersList as $partner): ?>
                     <?php if ($partner->file->getName()): ?>
                         <div class="banner"><a href="http://<?php echo $this->escape($partner->url); ?>" target="_blank"><img src="/files<?php echo $this->escape($partner->file->getSubPath()); ?>/<?php echo $this->escape($partner->file->getName()); ?>" border="0"></a></div>
-                        <?php $i++; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
             <?php endif; ?>
