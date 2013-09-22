@@ -9,40 +9,26 @@
                 <div class="one_item">
                     <div class="item_image">
                         <?php if ($item->file->getName()): ?>
-                            <a href="<?php if ($this->linkInfo->parent != null): ?>
-                                                            <?php if ($this->category != null): ?>
-                                                                <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $this->linkInfo->parent->link . '-' . $this->linkInfo->link . '-viewnews-category'); ?>
-                                                            <?php else: ?>
-                                                                <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $this->linkInfo->parent->link . '-' . $this->linkInfo->link . '-viewnews'); ?>
-                                                            <?php endif; ?>
-                                                        <?php else: ?>
-                                                            <?php if ($this->category != null): ?>
-                                                                <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $this->linkInfo->link . '-viewnews-category'); ?>
-                                                            <?php else: ?>
-                                                                <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $this->linkInfo->link . '-viewnews'); ?>
-                                                            <?php endif; ?>
-                                                        <?php endif; ?>" title="<?php echo $this->escape($item->title); ?>">
+                            <a href="<?php if ($this->category != null): ?>
+                                         <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $this->linkInfo->getFullUrl('-') . '-viewnews-category'); ?>
+                                     <?php else: ?>
+                                         <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $this->linkInfo->getFullUrl('-') . '-viewnews'); ?>
+                                     <?php endif; ?>
+                                     " title="<?php echo $this->escape($item->title); ?>">
                                 <img src="/files<?php echo $this->escape($item->file->getSubPath()); ?>/<?php echo $this->escape($item->file->getPreview()); ?>" title="<?php echo $this->escape($item->title); ?>" alt="<?php echo $this->escape($item->title); ?>"/>
                             </a>
                         <?php endif; ?>
                     </div>
 
                     <div class="item_right">
-                        <p class="item_title"><a href="
-                            <?php if ($this->linkInfo->parent != null): ?>
+                        <p class="item_title">
+                            <a href="
                                 <?php if ($this->category != null): ?>
-                                    <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $this->linkInfo->parent->link . '-' . $this->linkInfo->link . '-viewnews-category') ?>
+                                    <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $this->linkInfo->getFullUrl('-') . '-viewnews-category') ?>
                                 <?php else: ?>
-                                    <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $this->linkInfo->parent->link . '-' . $this->linkInfo->link . '-viewnews') ?>
+                                    <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $this->linkInfo->getFullUrl('-') . '-viewnews') ?>
                                 <?php endif; ?>
-                            <?php else: ?>
-                                <?php if ($this->category != null): ?>
-                                    <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id, 'categoryId' => $this->category->id), $this->linkInfo->link . '-viewnews-category') ?>
-                                <?php else: ?>
-                                    <?php echo $this->url(array('controller' => 'news', 'action' => 'viewnews', 'id' => $item->id), $this->linkInfo->link . '-viewnews') ?>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                                        " title=""><?php echo $this->escape(date('d.m.Y', strtotime($item->datePublic))); ?> <?php echo $this->escape($item->title); ?></a>
+                           " title=""><?php echo $this->escape(date('d.m.Y', strtotime($item->datePublic))); ?> <?php echo $this->escape($item->title); ?></a>
                         </p>
 
                         <p class="item_shortcontent"><?php echo $this->escape($item->shortText); ?></p>
