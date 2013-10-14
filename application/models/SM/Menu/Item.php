@@ -589,7 +589,7 @@ class SM_Menu_Item
     public static function getInstanceByLink($link)
     {
         try {
-            $sql = 'SELECT * FROM menu_item WHERE link=:link';
+            $sql = 'SELECT * FROM menu_item WHERE REPLACE(link, "_", "")=:link OR link=:link';
 
             $db = Zend_Registry::get('db');
             $result = $db->query($sql, array('link' => $link))->fetchAll();
