@@ -11,7 +11,13 @@ class View_Helpers_IfAllowed extends Zend_View_Helper_Abstract
 {
     public function ifAllowed($resource, $privilege = 'show')
     {
-        return true;
+        $acl = Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource('acl');
+
+        if ($acl->canResource($resource, $privilege)) {
+            return true;
+        }
+
+        return false;
     }
 
 }
