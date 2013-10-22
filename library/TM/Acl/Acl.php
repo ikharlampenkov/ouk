@@ -125,18 +125,26 @@ class TM_Acl_Acl extends Zend_Acl {
 
         //StdLib_Log::logMsg(' resource ' . $resource . ' priv ' . $privilege);
 
+        $check = TM_User_Resource::checkResource($resource);
+        if (!$check) {
+            $oResource = new TM_User_Resource();
+            $oResource->setTitle($resource);
+            $oResource->setRTitle($resource);
+            $oResource->insertToDB();
+        }
+
         //Если ресурс не найден закрываем доступ
         if (!$this->has($resource)) {
-            return false;
+            //return false;
         }
 
         //Инициируем роль
         $storage_data = Zend_Auth::getInstance()->getStorage()->read();
-        $role = array_key_exists('role', $storage_data)?$storage_data->role : 'guest';
+        $role = (is_array($storage_data) && array_key_exists('role', $storage_data))?$storage_data->role : 'guest';
 
         //StdLib_Log::logMsg('role ' . $role . ' resource ' . $resource . ' priv ' . $privilege);
 
-        return $this->isAllowed($role, $resource, $privilege);
+        return true; //$this->isAllowed($role, $resource, $privilege);
     }
 
     public function canResource($resource, $privilege = 'show')

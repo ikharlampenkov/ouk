@@ -186,6 +186,7 @@ class TM_User_Resource
      *
      * @param array $values
      *
+     * @throws Exception
      * @return TM_User_Resource
      * @static
      * @access public
@@ -196,6 +197,23 @@ class TM_User_Resource
             $o = new TM_User_Resource();
             $o->fillFromArray($values);
             return $o;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public static function checkResource($resource)
+    {
+        try {
+            $db = Zend_Registry::get('db');
+            $sql = 'SELECT COUNT(id) AS cnt FROM tm_user_resource WHERE title=:title';
+            $result = $db->query($sql, array('title' => $resource))->fetch();
+
+            if (isset($result['cnt']) && $result['cnt'] == 1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

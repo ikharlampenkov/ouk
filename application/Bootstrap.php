@@ -156,22 +156,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initAcl()
     {
-        /*
+
         Zend_Loader::loadClass('TM_Acl_Acl');
         Zend_Loader::loadClass('CheckAccess');
         Zend_Controller_Front::getInstance()->registerPlugin(new CheckAccess());
 
         $view = $this->getResource('View');
-        $view->getEngine()->loadPlugin('smarty_block_if_allowed');
-        $view->getEngine()->loadPlugin('smarty_block_if_object_allowed');
-        return new TM_Acl_Acl();
-        */
+        //$view->getEngine()->loadPlugin('smarty_block_if_allowed');
+        //$view->getEngine()->loadPlugin('smarty_block_if_object_allowed');
 
-        $view = $this->getResource('View');
+
+
+        //$view = $this->getResource('View');
         $view->addHelperPath(APPLICATION_PATH . "/views/helpers/", 'View_Helpers');
         //Zend_Loader::loadClass('Views_Helpers_IfAllowed');
         //$helper = new Views_Helpers_IfAllowed();
         //$view->registerHelper($helper, 'ifAllowed');
+
+        return new TM_Acl_Acl();
     }
 
     protected function _initViewParam()
