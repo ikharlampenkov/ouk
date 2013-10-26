@@ -68,9 +68,9 @@
         <?php if ($this->userRoleList !== false): ?>
             <?php foreach ($this->userRoleList as $role): ?>
                 <tr>
-                    <td><img src="/images/icon/group.png"/>&nbsp;<?php echo $role->rtitle ?></td>
+                    <td><img src="/img/icon/group.png"/>&nbsp;<?php echo $role->rtitle ?></td>
                     <td><?php echo $role->title ?></td>
-                    <td class="tedit"><img src="/images/icon/comanda.png"/>&nbsp;<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'showRoleAcl', 'idRole' => $role->id)) ?>">права</a></td>
+                    <td class="tedit"><img src="/img/icon/comanda.png"/>&nbsp;<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'showRoleAcl', 'idRole' => $role->id)) ?>">права</a></td>
                     <td class="tedit">
                         <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'editRole', 'id' => $role->id)) ?>"><i class="icon-pencil"></i></a>
                         <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'deleteRole', 'id' => $role->id)) ?>" onclick="return confirmDelete('<?php $role->rtitle ?>');"><i class="icon-remove"></i></a></td>
