@@ -6,8 +6,9 @@
  * Time: 20:16
  * To change this template use File | Settings | File Templates.
  */
- 
-abstract class TM_Attribute_AttributeTypeMapper {
+
+abstract class TM_Attribute_AttributeTypeMapper
+{
 
     /**
      * @var TM_Attribute_AttributeType
@@ -20,7 +21,6 @@ abstract class TM_Attribute_AttributeTypeMapper {
     protected $_db;
 
     /**
-
      * @return TM_Attribute_AttributeTypeMapper
      * @access public
      */
@@ -32,50 +32,56 @@ abstract class TM_Attribute_AttributeTypeMapper {
     /**
      *
      *
+     * @param TM_Attribute_AttributeType $type
+     *
      * @return void void
      * @abstract
      * @access public
      */
-    abstract public function insertToDB($type);
+    abstract public function insertToDB(TM_Attribute_AttributeType $type);
 
     /**
      *
+     *
+     * @param TM_Attribute_AttributeType $type
      *
      * @return void
      * @abstract
      * @access public
      */
-    abstract public function updateToDB($type);
+    abstract public function updateToDB(TM_Attribute_AttributeType $type);
 
     /**
      *
+     *
+     * @param TM_Attribute_AttributeType $type
      *
      * @return void
      * @abstract
      * @access public
      */
-    abstract public function deleteFromDB($type);
+    abstract public function deleteFromDB(TM_Attribute_AttributeType $type);
 
     /**
      *
      *
      * @param int $id
-
-     * @return Attribute::TM_Attribute_AttributeType
+     *
+     * @return TM_Attribute_AttributeType
      * @abstract
      * @access public
      */
-    abstract public function getInstanceById( $id );
+    abstract public function getInstanceById($id);
 
     /**
      *
      *
      * @param array $values
-
-     * @return Attribute::TM_Attribute_Attribute
+     *
+     * @return TM_Attribute_Attribute
      * @access public
      */
-    abstract public function getInstanceByArray( $values );
+    abstract public function getInstanceByArray($values);
 
     /**
      *
@@ -84,11 +90,13 @@ abstract class TM_Attribute_AttributeTypeMapper {
      * @abstract
      * @access public
      */
-    abstract public function getAllInstance( );
+    abstract public function getAllInstance();
 
     /**
      * @abstract
+     *
      * @param int $id
+     *
      * @return void
      */
     abstract public function selectFromDB($id);

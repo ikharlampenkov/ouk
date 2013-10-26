@@ -16,9 +16,12 @@ class TM_User_AttributeTypeMapper extends TM_Attribute_AttributeTypeMapper
     /**
      *
      *
+     * @param TM_Attribute_AttributeType $type
+     *
+     * @throws Exception
      * @return void
      */
-    public function insertToDB($type)
+    public function insertToDB(TM_Attribute_AttributeType $type)
     {
         try {
             $sql = 'INSERT INTO tm_user_attribute_type(title, handler, description) VALUES (:title, :handler, :description)';
@@ -32,10 +35,13 @@ class TM_User_AttributeTypeMapper extends TM_Attribute_AttributeTypeMapper
     /**
      *
      *
+     * @param TM_Attribute_AttributeType $type
+     *
+     * @throws Exception
      * @return void
      * @access public
      */
-    public function updateToDB($type)
+    public function updateToDB(TM_Attribute_AttributeType $type)
     {
         try {
             $sql
@@ -51,10 +57,12 @@ class TM_User_AttributeTypeMapper extends TM_Attribute_AttributeTypeMapper
     /**
      *
      *
-     * @return
-     * @access public
+     * @param TM_Attribute_AttributeType $type
+     *
+     * @throws Exception
+     * @return void
      */
-    public function deleteFromDB($type)
+    public function deleteFromDB(TM_Attribute_AttributeType $type)
     {
         try {
             $sql = 'DELETE FROM tm_user_attribute_type WHERE id=:id';
@@ -96,25 +104,15 @@ class TM_User_AttributeTypeMapper extends TM_Attribute_AttributeTypeMapper
     /**
      *
      *
+     * @throws Exception
      * @return array
      * @access public
      */
     public function getAllInstance()
     {
         try {
-            $db = Zend_Registry::get('db');
             $sql = 'SELECT * FROM tm_user_attribute_type';
-            $result = $db->query($sql)->fetchAll();
-
-            if (isset($result[0])) {
-                $retArray = array();
-                foreach ($result as $res) {
-                    $retArray[] = TM_Attribute_AttributeTypeFactory::getAttributeTypeByArray($this, $res);
-                }
-                return $retArray;
-            } else {
-                return false;
-            }
+            return new TM_Attribute_AttributeTypeDeferredCollection($sql, $this);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -125,6 +123,7 @@ class TM_User_AttributeTypeMapper extends TM_Attribute_AttributeTypeMapper
      *
      * @param array $values
      *
+     * @throws Exception
      * @return TM_Attribute_AttributeType
      * @access public
      */
@@ -143,6 +142,7 @@ class TM_User_AttributeTypeMapper extends TM_Attribute_AttributeTypeMapper
     /**
      * @param int $id
      *
+     * @throws Exception
      * @return bool|array
      */
     public function selectFromDB($id)
@@ -161,5 +161,4 @@ class TM_User_AttributeTypeMapper extends TM_Attribute_AttributeTypeMapper
             throw new Exception($e->getMessage());
         }
     }
-} // end of TM_User_AttributeType
-?>
+}

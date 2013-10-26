@@ -89,7 +89,7 @@ class TM_User_User
 
     public function __get($name)
     {
-        $method = "get{$name}";
+        $method = 'get' . ucfirst($name);
         if (method_exists($this, $method)) {
             return $this->$method();
         } else {
@@ -146,13 +146,13 @@ class TM_User_User
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-    } // end of member function updateToDb
+    }
 
     /**
      *
      *
-     * @return
-     * @access public
+     * @throws Exception
+     * @return void
      */
     public function deleteFromDb()
     {
@@ -162,12 +162,12 @@ class TM_User_User
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-    } // end of member function deleteFromDb
+    }
 
     /**
      *
      *
-     * @param int id
+     * @param int $id
      *
      * @throws Exception
      * @return TM_User_User
@@ -191,12 +191,12 @@ class TM_User_User
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-    } // end of member function getInstanceById
+    }
 
     /**
      *
      *
-     * @param int id
+     * @param string $login
      *
      * @throws Exception
      * @return TM_User_User
@@ -243,7 +243,7 @@ class TM_User_User
     /**
      *
      *
-     * @param array values
+     * @param array $values
      *
      * @throws Exception
      * @return TM_User_User
@@ -259,7 +259,7 @@ class TM_User_User
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-    } // end of member function getInstanceByArray
+    }
 
     /**
      *
@@ -288,7 +288,7 @@ class TM_User_User
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-    } // end of member function getAllInstance
+    }
 
     /**
      *
@@ -309,16 +309,18 @@ class TM_User_User
         $this->setRole($o_role);
 
         $this->getAttributeList();
-    } // end of member function fillFromArray
+    }
 
     public function getAttributeList()
     {
         if (is_null($this->_attributeList) || empty($this->_attributeList)) {
             try {
-                $attributeList = TM_Attribute_Attribute::getAllInstance(new TM_User_AttributeMapper(), $this);
+                $oMapper = new TM_User_AttributeMapper();
+                $attributeList = $oMapper->getAllInstance($this);
+                unset($oMapper);
                 if ($attributeList !== false) {
                     foreach ($attributeList as $attribute) {
-                        $this->_attributeList[$attribute->attribyteKey] = $attribute;
+                        $this->_attributeList[$attribute->attributeKey] = $attribute;
                     }
                 }
 
@@ -343,8 +345,8 @@ class TM_User_User
 
         } else {
             $oHash = TM_User_Hash::getInstanceById($key);
-            $oAttribute = new TM_Attribute_Attribute(new TM_User_AttributeMapper(), $this);
-            $oAttribute->setAttribyteKey($key);
+            $oAttribute = new TM_Attribute_Attribute($this);
+            $oAttribute->setAttributeKey($key);
             $oAttribute->setType($oHash->getType());
             $oAttribute->setValue($value);
 
@@ -365,16 +367,15 @@ class TM_User_User
     protected function saveAttributeList()
     {
         if (!is_null($this->_attributeList) && !empty($this->_attributeList)) {
+            $oMapper = new TM_User_AttributeMapper();
             foreach ($this->_attributeList as $attribute) {
                 try {
-                    $attribute->insertToDB();
+                    $oMapper->insertToDb($attribute);
                 } catch (Exception $e) {
-                    $attribute->updateToDB();
+                    $oMapper->updateToDB($attribute);
                 }
             }
+            unset($oMapper);
         }
     }
-
-
-} // end of TM_User_User
-?>
+}
