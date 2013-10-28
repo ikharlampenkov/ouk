@@ -127,6 +127,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $db = StdLib_DB::getInstance();
         $db->debug = $options['db']['debug'];
+
+        $writer = new Zend_Log_Writer_Stream(Zend_Registry::get('production')->log->path . '/zend_log.log');
+        $log = new Zend_Log();
+        $log->addWriter($writer);
+        $log->registerErrorHandler();
+        return $log;
     }
 
     protected function _initAuth()
