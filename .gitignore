@@ -4,3 +4,5 @@ public/ckfinder
 library/Zend
 public/files/*.jpg
 public/files/*.gif
+public/files/*.png
+docs/sibdnevnik_ouk.sql
